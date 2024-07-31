@@ -1,0 +1,41 @@
+<odoo>
+    <template id="payment_dag_form" name="DAG Payment Form">
+        <t t-call="website.layout">
+            <div class="container">
+                <h2>Pay with DAG</h2>
+                <form id="dag_payment_form" method="POST" action="/payment/dag/feedback">
+                    <div class="form-group">
+                        <label for="dag_wallet_address">DAG Wallet Address</label>
+                        <input type="text" class="form-control" id="dag_wallet_address" name="dag_wallet_address" t-att-value="acquirer.dag_wallet_address" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="dag_transaction_hash">Transaction Hash</label>
+                        <input type="text" class="form-control" id="dag_transaction_hash" name="dag_transaction_hash" required="required"/>
+                    </div>
+                    <input type="hidden" name="reference" t-att-value="reference"/>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="payment_dag_thank_you_page" name="DAG Payment Thank You">
+        <t t-call="website.layout">
+            <div class="container">
+                <h2>Thank You</h2>
+                <p>Your transaction has been completed successfully.</p>
+                <a href="/" class="btn btn-primary">Return to Home</a>
+            </div>
+        </t>
+    </template>
+
+    <template id="payment_dag_error_page" name="DAG Payment Error">
+        <t t-call="website.layout">
+            <div class="container">
+                <h2>Payment Error</h2>
+                <p>There was an error processing your transaction. Please try again.</p>
+                <a href="/" class="btn btn-primary">Return to Home</a>
+            </div>
+        </t>
+    </template>
+</odoo>

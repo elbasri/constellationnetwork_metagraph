@@ -1,0 +1,12 @@
+<odoo>
+    <record id="payment_acquirer_dag" model="payment.acquirer">
+        <field name="name">DAG</field>
+        <field name="provider">dag</field>
+        <field name="state">test</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="pre_msg">Pay with DAG.</field>
+        <field name="done_msg">Your transaction has been completed successfully.</field>
+        <field name="cancel_msg">Your transaction has been cancelled.</field>
+        <field name="image_128" type="base64" file="constellationnetwork_metagraph/static/description/dag_icon.png"/>
+    </record>
+</odoo>

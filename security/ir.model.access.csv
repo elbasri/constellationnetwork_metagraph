@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_metagraph,access_metagraph,model_metagraph,,1,1,1,1
+access_metagraph_config,access_metagraph_config,model_metagraph_config,,1,1,1,1
+access_payment_acquirer_dag,payment.acquirer.dag,model_payment_acquirer,base.group_user,1,1,1,1
+access_payment_transaction_dag,payment.transaction.dag,model_payment_transaction,base.group_user,1,1,1,1
+

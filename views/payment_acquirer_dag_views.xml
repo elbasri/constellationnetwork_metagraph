@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="acquirer_form_dag" model="ir.ui.view">
+            <field name="name">acquirer.form.dag</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer"]' position='inside'>
+                    <group>
+                        <field name="dag_wallet_address"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

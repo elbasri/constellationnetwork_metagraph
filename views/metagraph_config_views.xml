@@ -1,0 +1,67 @@
+<odoo>
+    <record id="view_metagraph_config_form" model="ir.ui.view">
+        <field name="name">metagraph.config.form</field>
+        <field name="model">metagraph.config</field>
+        <field name="arch" type="xml">
+            <form string="Metagraph Configuration">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="wallet_address"/>
+                        <field name="testnet_url"/>
+                        <field name="integration_url"/>
+                        <field name="mainnet_url"/>
+                        <field name="faucet_testnet_url"/>
+                        <field name="faucet_integration_url"/>
+                        <field name="faucet_mainnet_url"/>
+                        <field name="check_status_testnet_url"/>
+                        <field name="check_status_integration_url"/>
+                        <field name="check_status_mainnet_url"/>
+                        <field name="payment_testnet_url"/>
+                        <field name="payment_integration_url"/>
+                        <field name="payment_mainnet_url"/>
+                        <field name="environment"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_metagraph_config_tree" model="ir.ui.view">
+        <field name="name">metagraph.config.tree</field>
+        <field name="model">metagraph.config</field>
+        <field name="arch" type="xml">
+            <tree string="Metagraph Configurations">
+                <field name="name"/>
+                <field name="wallet_address"/>
+                <field name="testnet_url"/>
+                <field name="integration_url"/>
+                <field name="mainnet_url"/>
+                <field name="faucet_testnet_url"/>
+                <field name="faucet_integration_url"/>
+                <field name="faucet_mainnet_url"/>
+                <field name="check_status_testnet_url"/>
+                <field name="check_status_integration_url"/>
+                <field name="check_status_mainnet_url"/>
+                <field name="payment_testnet_url"/>
+                <field name="payment_integration_url"/>
+                <field name="payment_mainnet_url"/>
+                <field name="environment"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_metagraph_config" model="ir.actions.act_window">
+        <field name="name">Metagraph Configurations</field>
+        <field name="res_model">metagraph.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first metagraph configuration
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_metagraph_root" name="Metagraph Management" sequence="10"/>
+    <menuitem id="menu_metagraph_config" name="Configurations" parent="menu_metagraph_root" action="action_metagraph_config" sequence="1"/>
+</odoo>

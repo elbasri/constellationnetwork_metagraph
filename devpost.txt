@@ -1,0 +1,26 @@
+## Inspiration
+
+The opportunity to learn about the Constellation Network and its innovative concepts and technologies was very appealing. I proposed this technology to a business partner who uses the Odoo system. He was excited about the idea of introducing a new cryptocurrency-based payment method and using the metagraph to support transparency in the supply chain.
+
+## What it does
+The project integrates Constellation Network's DAG-based payment method into the Odoo ERP system, enabling secure and transparent transactions. Additionally, it aims to enhance supply chain management using metagraph technology.
+
+## How we built it
+The integration was built by extending the Odoo payment acquirer module to include DAG-based payments. We utilized the metagraph configuration to fetch necessary details and implemented the transaction validation using the Constellation Network's APIs.
+
+## Challenges we ran into
+The main challenges were understanding the new technology and ensuring seamless integration with the existing Odoo system. Handling transaction validation and maintaining security were also significant concerns.
+
+## Accomplishments that we're proud of
+Successfully integrating a new payment method into a robust ERP system like Odoo and leveraging blockchain technology for supply chain transparency is a significant accomplishment.
+
+## What we learned
+We gained a deeper understanding of the Constellation Network, its capabilities, and how it can be used to enhance business processes. We also learned about the challenges and intricacies of integrating new technologies into existing systems.
+
+## What's next for Constellation Metagraph Integration for Odoo ERP
+Next, we plan to expand the use of metagraph technology in other areas of the supply chain and explore additional features that can enhance transparency and efficiency.
+Built with:
+    -Odoo
+    -Constellation Network
+    -Python
+    -Blockchain Technology

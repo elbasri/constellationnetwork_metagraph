@@ -1,0 +1,69 @@
+<odoo>
+    <record id="view_metagraph_form" model="ir.ui.view">
+        <field name="name">metagraph.form</field>
+        <field name="model">metagraph</field>
+        <field name="arch" type="xml">
+            <form string="Metagraph">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="metagraph_details"/>
+                        <field name="wallet_address_id"/>
+                        <field name="environment"/>
+                    </group>
+                    <group>
+                        <field name="blockchain_status"/>
+                        <field name="blockchain_hash"/>
+                        <field name="transaction_hash"/>
+                        <field name="metagraph_address"/>
+                    </group>
+                    <group>
+                        <field name="amount"/>
+                        <field name="source"/>
+                        <field name="destination"/>
+                        <field name="fee"/>
+                        <field name="parent_hash"/>
+                        <field name="parent_ordinal"/>
+                        <field name="block_hash"/>
+                        <field name="snapshot_hash"/>
+                        <field name="snapshot_ordinal"/>
+                        <field name="timestamp"/>
+                        <field name="salt"/>
+                        <field name="proof_id"/>
+                        <field name="proof_signature"/>
+                    </group>
+                    <group>
+                        <button name="check_status" string="Check Status" type="object" class="btn-secondary"/>
+                        <button name="get_testnet_dag" string="Get TestNet DAG" type="object" class="btn-secondary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_metagraph_tree" model="ir.ui.view">
+        <field name="name">metagraph.tree</field>
+        <field name="model">metagraph</field>
+        <field name="arch" type="xml">
+            <tree string="Metagraphs">
+                <field name="name"/>
+                <field name="blockchain_status"/>
+                <field name="created_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="metagraph_action" model="ir.actions.act_window">
+        <field name="name">Metagraphs</field>
+        <field name="res_model">metagraph</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first metagraph
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_metagraph_root" name="Metagraph Management" sequence="1"/>
+    <menuitem id="menu_metagraph" name="Metagraphs" parent="menu_metagraph_root" action="metagraph_action" sequence="1"/>
+</odoo>
