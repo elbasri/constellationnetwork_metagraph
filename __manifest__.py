@@ -15,8 +15,10 @@
         'views/sale_order_views.xml',
         'views/stock_picking_views.xml',
         'views/payment_template_dag.xml',
+        'views/payment_acquirer_dag_views.xml',
         'data/payment_acquirer_dag_data.xml',
     ],
     'installable': True,
     'application': True,
+    'controllers': ['controllers/main.py'],
 }
