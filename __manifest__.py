@@ -20,4 +20,5 @@
     ],
     'installable': True,
     'application': True,
+    'controllers': ['controllers/main.py'],
 }
