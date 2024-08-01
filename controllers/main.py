@@ -8,6 +8,7 @@ class PaymentDagController(http.Controller):
 
     @http.route(['/payment/dag/form'], type='http', auth='public', website=True)
     def dag_payment_form(self, **kwargs):
+        _logger.info('Received kwargs for /payment/dag/form: %s', kwargs)
         acquirer = request.env['payment.acquirer'].sudo().search([('provider', '=', 'dag')], limit=1)
         values = {
             'acquirer': acquirer,
@@ -19,6 +20,7 @@ class PaymentDagController(http.Controller):
             'company_id': kwargs.get('company_id'),
             'access_token': kwargs.get('access_token'),
         }
+        _logger.info('Values prepared for rendering: %s', values)
         return request.render('constellationnetwork_metagraph.payment_dag_form', values)
 
     @http.route(['/payment/dag/feedback'], type='http', auth='public', methods=['POST'], csrf=False)
