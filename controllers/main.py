@@ -100,7 +100,10 @@ class PaymentDagController(http.Controller):
                     'proof_id': metagraph.proof_id,
                     'proof_signature': metagraph.proof_signature,
                 })
-                _logger.info('Metagraph record updated successfully.')
+                _logger.info('Metagraph record updated successfully: metagraph.blockchain_hash %s', metagraph.blockchain_hash)
+                _logger.info('Metagraph record updated successfully: metagraph.metagraph_address %s', metagraph.metagraph_address)
+                _logger.info('Metagraph record updated successfully: metagraph.block_hash %s', metagraph.block_hash)
+                _logger.info('Metagraph record updated successfully: metagraph.id %s', metagraph.id)
             except Exception as e:
                 _logger.error('Failed to update Metagraph record: %s', str(e))
             return request.render('constellationnetwork_metagraph.payment_dag_thank_you_page', {})
