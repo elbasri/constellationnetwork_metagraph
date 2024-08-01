@@ -44,10 +44,15 @@ class PaymentDagController(http.Controller):
             return request.redirect('/payment/process')
 
         # Call check_status method on the located metagraph record
+        _logger.error('Call check_status method')
         metagraph.check_status()
         if metagraph.blockchain_status == 'confirmed':
+            _logger.error('Call check_status method confirmed')
             tx._set_transaction_done()
+            _logger.error('Call check_status method _set_transaction_done')
             return request.render('constellationnetwork_metagraph.payment_dag_thank_you_page', {})
         else:
+            _logger.error('Call check_status method not confirmed')
             tx._set_transaction_cancel()
+            _logger.error('Call check_status method not confirmed _set_transaction_cancel')
             return request.render('constellationnetwork_metagraph.payment_dag_error_page', {})
