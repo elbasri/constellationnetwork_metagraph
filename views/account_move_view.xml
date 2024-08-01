@@ -1,10 +1,10 @@
 <odoo>
-    <record id="view_order_form_inherit_metagraph" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.metagraph</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+    <record id="view_invoice_form_inherit_metagraph" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.metagraph</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <page name="order_lines" position="after">
+            <notebook position="inside">
                 <page string="DAG Transactions">
                     <field name="metagraph_ids">
                         <tree>
@@ -15,7 +15,7 @@
                         </tree>
                     </field>
                 </page>
-            </page>
+            </notebook>
         </field>
     </record>
 </odoo>
