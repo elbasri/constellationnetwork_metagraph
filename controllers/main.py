@@ -37,14 +37,15 @@ class PaymentDagController(http.Controller):
             _logger.error('Transaction not found for reference %s', reference)
             return request.redirect('/payment/process')
         
-        # Call check_status function
-        metagraph = request.env['metagraph.config'].sudo().search([], limit=1)
+        # Locate the metagraph record using transaction hash
+        metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
         if not metagraph:
-            _logger.error('Metagraph configuration not found')
+            _logger.error('Metagraph record not found for transaction hash %s', transaction_hash)
             return request.redirect('/payment/process')
 
-        status = metagraph.check_status(transaction_hash)
-        if status == 'confirmed':
+        # Call check_status method on the located metagraph record
+        metagraph.check_status()
+        if metagraph.blockchain_status == 'confirmed':
             tx._set_transaction_done()
             return request.render('constellationnetwork_metagraph.payment_dag_thank_you_page', {})
         else:
