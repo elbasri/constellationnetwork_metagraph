@@ -65,6 +65,12 @@ class PaymentDagController(http.Controller):
                     'proof_signature': '',
                 })
                 _logger.info('Metagraph record created: %s', metagraph)
+                # Verify record creation in database
+                created_record = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
+                if created_record:
+                    _logger.info('Metagraph record verified in database: %s', created_record)
+                else:
+                    _logger.error('Metagraph record not found in database after creation.')
             except Exception as e:
                 _logger.error('Failed to create Metagraph record: %s', str(e))
                 return request.redirect('/payment/process')
@@ -75,24 +81,28 @@ class PaymentDagController(http.Controller):
             _logger.info('Transaction confirmed for transaction hash %s', transaction_hash)
             tx._set_transaction_done()
             # Update existing metagraph record to confirmed
-            metagraph.write({
-                'blockchain_status': 'confirmed',
-                'blockchain_hash': metagraph.blockchain_hash,
-                'metagraph_address': metagraph.metagraph_address,
-                'amount': metagraph.amount,
-                'source': metagraph.source,
-                'destination': metagraph.destination,
-                'fee': metagraph.fee,
-                'parent_hash': metagraph.parent_hash,
-                'parent_ordinal': metagraph.parent_ordinal,
-                'block_hash': metagraph.block_hash,
-                'snapshot_hash': metagraph.snapshot_hash,
-                'snapshot_ordinal': metagraph.snapshot_ordinal,
-                'timestamp': metagraph.timestamp,
-                'salt': metagraph.salt,
-                'proof_id': metagraph.proof_id,
-                'proof_signature': metagraph.proof_signature,
-            })
+            try:
+                metagraph.write({
+                    'blockchain_status': 'confirmed',
+                    'blockchain_hash': metagraph.blockchain_hash,
+                    'metagraph_address': metagraph.metagraph_address,
+                    'amount': metagraph.amount,
+                    'source': metagraph.source,
+                    'destination': metagraph.destination,
+                    'fee': metagraph.fee,
+                    'parent_hash': metagraph.parent_hash,
+                    'parent_ordinal': metagraph.parent_ordinal,
+                    'block_hash': metagraph.block_hash,
+                    'snapshot_hash': metagraph.snapshot_hash,
+                    'snapshot_ordinal': metagraph.snapshot_ordinal,
+                    'timestamp': metagraph.timestamp,
+                    'salt': metagraph.salt,
+                    'proof_id': metagraph.proof_id,
+                    'proof_signature': metagraph.proof_signature,
+                })
+                _logger.info('Metagraph record updated successfully.')
+            except Exception as e:
+                _logger.error('Failed to update Metagraph record: %s', str(e))
             return request.render('constellationnetwork_metagraph.payment_dag_thank_you_page', {})
         else:
             _logger.info('Transaction not confirmed for transaction hash %s', transaction_hash)
