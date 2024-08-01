@@ -13,6 +13,12 @@
                         <input type="text" class="form-control" id="dag_transaction_hash" name="dag_transaction_hash" required="required"/>
                     </div>
                     <input type="hidden" name="reference" t-att-value="reference"/>
+                    <input type="hidden" name="amount" t-att-value="amount"/>
+                    <input type="hidden" name="currency_id" t-att-value="currency_id"/>
+                    <input type="hidden" name="partner_id" t-att-value="partner_id"/>
+                    <input type="hidden" name="order_id" t-att-value="order_id"/>
+                    <input type="hidden" name="company_id" t-att-value="company_id"/>
+                    <input type="hidden" name="access_token" t-att-value="access_token"/>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
