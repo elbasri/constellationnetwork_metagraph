@@ -42,27 +42,32 @@ class PaymentDagController(http.Controller):
         metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
         if not metagraph:
             _logger.info('Creating new Metagraph record for transaction hash %s', transaction_hash)
-            metagraph = request.env['metagraph'].create({
-                'name': 'Transaction ' + transaction_hash,
-                'metagraph_details': 'Details for transaction ' + transaction_hash,
-                'transaction_hash': transaction_hash,
-                'blockchain_status': 'pending',  # Initial status, will be updated after check_status
-                'wallet_address_id': request.env['metagraph.config'].sudo().search([], limit=1).id,
-                'created_date': datetime.now(),
-                'amount': float(post.get('amount', 0)),
-                'source': post.get('source_address'),
-                'destination': post.get('destination_address'),
-                'fee': float(post.get('fee', 0)),
-                'parent_hash': post.get('parent_hash'),
-                'parent_ordinal': int(post.get('parent_ordinal', 0)),
-                'block_hash': post.get('block_hash'),
-                'snapshot_hash': post.get('snapshot_hash'),
-                'snapshot_ordinal': int(post.get('snapshot_ordinal', 0)),
-                'timestamp': datetime.now(),
-                'salt': post.get('salt'),
-                'proof_id': post.get('proof_id'),
-                'proof_signature': post.get('proof_signature'),
-            })
+            try:
+                metagraph = request.env['metagraph'].create({
+                    'name': f'Transaction {transaction_hash}',
+                    'metagraph_details': f'Details for transaction {transaction_hash}',
+                    'transaction_hash': transaction_hash,
+                    'blockchain_status': 'pending',  # Initial status, will be updated after check_status
+                    'wallet_address_id': request.env['metagraph.config'].sudo().search([], limit=1).id,
+                    'created_date': datetime.now(),
+                    'amount': float(post.get('amount', 0)),
+                    'source': post.get('dag_wallet_address'),
+                    'destination': tx.acquirer_id.dag_wallet_address,
+                    'fee': 0,  # Adjust as needed
+                    'parent_hash': '',
+                    'parent_ordinal': 0,
+                    'block_hash': '',
+                    'snapshot_hash': '',
+                    'snapshot_ordinal': 0,
+                    'timestamp': datetime.now(),
+                    'salt': '',
+                    'proof_id': '',
+                    'proof_signature': '',
+                })
+                _logger.info('Metagraph record created: %s', metagraph)
+            except Exception as e:
+                _logger.error('Failed to create Metagraph record: %s', str(e))
+                return request.redirect('/payment/process')
 
         # Call check_status method on the located or newly created metagraph record
         metagraph.check_status()
