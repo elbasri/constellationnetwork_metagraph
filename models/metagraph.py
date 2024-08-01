@@ -36,6 +36,10 @@ class Metagraph(models.Model):
     salt = fields.Char(string='Salt')
     proof_id = fields.Char(string='Proof ID')
     proof_signature = fields.Char(string='Proof Signature')
+    
+    # Add references to Sale Order and Invoice
+    sale_order_id = fields.Many2one('sale.order', string='Sale Order')
+    invoice_id = fields.Many2one('account.move', string='Invoice')
 
     def retry_operation(self, operation, *args, **kwargs):
         max_retries = 5
