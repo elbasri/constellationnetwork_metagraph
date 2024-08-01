@@ -1,0 +1,14 @@
+<odoo>
+    <template id="payment_dag_thank_you_page" name="DAG Payment Thank You Page">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <section class="s_text_block">
+                    <div class="container">
+                        <h1>Payment Successful</h1>
+                        <p>Your payment has been successfully processed. Thank you!</p>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

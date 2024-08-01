@@ -1,0 +1,14 @@
+<odoo>
+    <template id="payment_dag_error_page" name="DAG Payment Error Page">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <section class="s_text_block">
+                    <div class="container">
+                        <h1>Payment Failed</h1>
+                        <p>There was an issue processing your payment. Please try again later or contact support.</p>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>
