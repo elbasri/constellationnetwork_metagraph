@@ -1,5 +1,5 @@
 <template id="portal_order_metagraph" inherit_id="sale.portal_order_page">
-    <xpath expr="//div[@class='o_portal_sale_order']" position="inside">
+    <xpath expr="//div[contains(@class, 'o_portal_sale_order')]" position="inside">
         <h3>DAG Transactions</h3>
         <table class="table">
             <thead>

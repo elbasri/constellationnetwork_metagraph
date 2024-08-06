@@ -1,5 +1,5 @@
 <template id="portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
-    <xpath expr="//div[@class='o_portal_invoice']" position="inside">
+    <xpath expr="//div[contains(@class, 'o_portal_invoice')]" position="inside">
         <h3>DAG Transactions</h3>
         <table class="table">
             <thead>
