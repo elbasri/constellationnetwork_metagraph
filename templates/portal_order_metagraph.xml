@@ -1,23 +1,28 @@
-<template id="portal_order_metagraph" inherit_id="sale.portal_order_page">
-    <xpath expr="//div[contains(@class, 'o_portal_sale_order')]" position="inside">
-        <h3>DAG Transactions</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Transaction Hash</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
-                <tr>
-                    <td t-esc="metagraph.name"/>
-                    <td t-esc="metagraph.blockchain_status"/>
-                    <td t-esc="metagraph.transaction_hash"/>
-                    <td t-esc="metagraph.amount"/>
-                </tr>
-            </tbody>
-        </table>
-    </xpath>
-</template>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_order_metagraph" inherit_id="sale.portal_order_page">
+        <xpath expr="//div[contains(@class, 'o_portal_sale_order')]" position="inside">
+            <div class="container mt16 mb16">
+                <h3>DAG Transactions</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Transaction Hash</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
+                        <tr>
+                            <td t-esc="metagraph.name"/>
+                            <td t-esc="metagraph.blockchain_status"/>
+                            <td t-esc="metagraph.transaction_hash"/>
+                            <td t-esc="metagraph.amount"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>
