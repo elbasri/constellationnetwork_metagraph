@@ -3,60 +3,60 @@
         <!-- Template Inheritances for Portal Pages -->
         <record id="portal_order_metagraph_template" model="ir.ui.view">
             <field name="name">portal.order.metagraph</field>
-            <field name="inherit_id" ref="sale.portal_order_page"/>
+            <field name="inherit_id" ref="sale.portal_my_orders"/>  <!-- Corrected external ID reference -->
             <field name="arch" type="xml">
-                <xpath expr="//div[@id='portal_order_sheet']" position="inside">
-                    <h3>DAG Transactions</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Transaction Hash</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="metagraphs" t-as="metagraph">
+                <xpath expr="//t[@t-if='orders']" position="inside">  <!-- Correct placement according to your structure -->
+                    <div class="container mt16 mb16">
+                        <h3>DAG Transactions</h3>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td><t t-esc="metagraph.name"/></td>
-                                    <td><t t-esc="metagraph.blockchain_status"/></td>
-                                    <td><t t-esc="metagraph.transaction_hash"/></td>
-                                    <td><t t-esc="metagraph.amount"/></td>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Transaction Hash</th>
+                                    <th>Amount</th>
                                 </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
+                                <tr>
+                                    <td t-esc="metagraph.name"/>
+                                    <td t-esc="metagraph.blockchain_status"/>
+                                    <td t-esc="metagraph.transaction_hash"/>
+                                    <td t-esc="metagraph.amount"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </xpath>
             </field>
         </record>
         
         <record id="portal_invoice_metagraph_template" model="ir.ui.view">
             <field name="name">portal.invoice.metagraph</field>
-            <field name="inherit_id" ref="account.portal_invoice_page"/>
+            <field name="inherit_id" ref="account.portal_invoice_page"/>  <!-- Ensured it matches your system's ID -->
             <field name="arch" type="xml">
-                <xpath expr="//div[@id='invoice_sheet']" position="inside">
-                    <h3>DAG Transactions</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Transaction Hash</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="metagraphs" t-as="metagraph">
+                <xpath expr="//div[@id='invoice_communication']" position="before">
+                    <div class="container mt16 mb16">
+                        <h3>DAG Transactions</h3>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td><t t-esc="metagraph.name"/></td>
-                                    <td><t t-esc="metagraph.blockchain_status"/></td>
-                                    <td><t t-esc="metagraph.transaction_hash"/></td>
-                                    <td><t t-esc="metagraph.amount"/></td>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Transaction Hash</th>
+                                    <th>Amount</th>
                                 </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody t-foreach="invoice.metagraph_ids" t-as="metagraph">
+                                <tr>
+                                    <td t-esc="metagraph.name"/>
+                                    <td t-esc="metagraph.blockchain_status"/>
+                                    <td t-esc="metagraph.transaction_hash"/>
+                                    <td t-esc="metagraph.amount"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </xpath>
             </field>
         </record>
