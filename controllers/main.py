@@ -41,8 +41,12 @@ class PaymentDagController(http.Controller):
 
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
-            # Force an error for testing
-            raise Exception("Forced error for testing")
+            
+            logger.info('Transaction status simulation: failed')
+            tx._set_transaction_cancel()
+            request.env.cr.rollback()
+            return redirect('/payment/process?status=failed')
+    
             metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
             if not metagraph:
                 metagraph_data = {
