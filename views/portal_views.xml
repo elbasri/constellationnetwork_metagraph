@@ -3,12 +3,13 @@
         <!-- Template Inheritances for Portal Pages -->
         <record id="portal_order_metagraph_template" model="ir.ui.view">
             <field name="name">portal.order.metagraph</field>
-            <field name="inherit_id" ref="sale.portal_my_orders"/>  <!-- Corrected external ID reference -->
+            <field name="inherit_id" ref="sale.portal_my_orders"/>  <!-- Ensure this is the correct ID -->
             <field name="arch" type="xml">
-                <xpath expr="//t[@t-if='orders']" position="inside">  <!-- Correct placement according to your structure -->
+                <!-- Correct XPath according to the structure provided in sale.portal_my_orders -->
+                <xpath expr="//t[@t-if='orders']" position="inside">
                     <div class="container mt16 mb16">
                         <h3>DAG Transactions</h3>
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -33,9 +34,10 @@
         
         <record id="portal_invoice_metagraph_template" model="ir.ui.view">
             <field name="name">portal.invoice.metagraph</field>
-            <field name="inherit_id" ref="account.portal_invoice_page"/>  <!-- Ensured it matches your system's ID -->
+            <field name="inherit_id" ref="account.portal_invoice_page"/>  <!-- Ensure this is the correct ID -->
             <field name="arch" type="xml">
-                <xpath expr="//div[@id='invoice_communication']" position="before">
+                <!-- Ensure the position is before a valid container element in account.portal_invoice_page -->
+                <xpath expr="//div[contains(@class, 'o_portal_invoice')]" position="before">
                     <div class="container mt16 mb16">
                         <h3>DAG Transactions</h3>
                         <table class="table">
