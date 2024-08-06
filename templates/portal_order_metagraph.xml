@@ -12,16 +12,26 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-if="order.metagraph_ids" t-foreach="order.metagraph_ids" t-as="metagraph">
-                        <tr>
-                            <td t-esc="metagraph.name"/>
-                            <td t-esc="metagraph.blockchain_status"/>
-                            <td t-esc="metagraph.transaction_hash"/>
-                            <td t-esc="metagraph.amount"/>
+                    <tbody t-foreach="orders" t-as="order">
+                        <tr t-if="order.metagraph_ids">
+                            <td colspan="4">
+                                <table>
+                                    <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
+                                        <tr>
+                                            <td t-esc="metagraph.name"/>
+                                            <td t-esc="metagraph.blockchain_status"/>
+                                            <td t-esc="metagraph.transaction_hash"/>
+                                            <td t-esc="metagraph.amount"/>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr t-if="not order.metagraph_ids">
+                            <td colspan="4">No DAG Transactions available.</td>
                         </tr>
                     </tbody>
                 </table>
-                <p t-if="not order.metagraph_ids">No DAG Transactions available.</p>
             </div>
         </xpath>
     </template>
