@@ -41,6 +41,8 @@ class PaymentDagController(http.Controller):
 
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
+            # Force an error for testing
+            raise Exception("Forced error for testing")
             metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
             if not metagraph:
                 metagraph_data = {
@@ -93,13 +95,12 @@ class PaymentDagController(http.Controller):
                 })
                 request.env.cr.commit()
                 _logger.info('Database transaction committed successfully.')
-                request.env.cr.rollback()
                 return redirect('/payment/process')
             else:
                 tx._set_transaction_cancel()
                 request.env.cr.rollback()
                 _logger.info('Transaction not confirmed, rolling back.')
-                return redirect('/payment/error') 
+                return redirect('/payment/process') 
         except Exception as e:
             request.env.cr.rollback()  # Rollback in case of error
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
