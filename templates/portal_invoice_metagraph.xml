@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
-        <xpath expr="//div[contains(@class, 'o_portal_invoice')]" position="inside">
+        <xpath expr="//div[contains(@class, 'o_portal_invoice_sidebar')]" position="before">
             <div class="container mt16 mb16">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
