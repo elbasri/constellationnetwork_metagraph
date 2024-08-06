@@ -1,4 +1,4 @@
-from odoo import http, fields, models
+from odoo import http
 from odoo.http import request
 
 class CustomerPortal(http.Controller):
@@ -8,22 +8,38 @@ class CustomerPortal(http.Controller):
         # Include additional data preparation here if necessary
         return values
 
-    @http.route(['/my/orders/<int:order_id>'], type='http', auth='public', website=True)
+    @http.route(['/my/orders/<int:order_id>'], type='http', auth='user', website=True)
     def portal_order_page(self, order_id, report_type=None, access_token=None, message=False, download=False, **kw):
+        # Ensure that the user has access to this order
         order = request.env['sale.order'].sudo().browse(order_id)
-        metagraphs = request.env['metagraph'].sudo().search([('sale_order_id', '=', order.id)])
+        if not order or order.partner_id != request.env.user.partner_id:
+            return request.redirect('/my')  # Redirect to the user's portal if access is denied
+
+        # Prepare the data for rendering the template
         values = {
             'order': order,
-            'metagraphs': metagraphs,
+            'metagraphs': order.metagraph_ids,
+            'report_type': report_type,
+            'access_token': access_token,
+            'message': message,
+            'download': download,
         }
         return request.render("constellationnetwork_metagraph.portal_order_metagraph", values)
 
-    @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth='public', website=True)
+    @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth='user', website=True)
     def portal_invoice_page(self, invoice_id, report_type=None, access_token=None, message=False, download=False, **kw):
+        # Ensure that the user has access to this invoice
         invoice = request.env['account.move'].sudo().browse(invoice_id)
-        metagraphs = request.env['metagraph'].sudo().search([('invoice_id', '=', invoice.id)])
+        if not invoice or invoice.partner_id != request.env.user.partner_id:
+            return request.redirect('/my')  # Redirect to the user's portal if access is denied
+
+        # Prepare the data for rendering the template
         values = {
             'invoice': invoice,
-            'metagraphs': metagraphs,
+            'metagraphs': invoice.metagraph_ids,
+            'report_type': report_type,
+            'access_token': access_token,
+            'message': message,
+            'download': download,
         }
         return request.render("constellationnetwork_metagraph.portal_invoice_metagraph", values)

@@ -1,7 +1,7 @@
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="sale.portal_my_orders">
-        <xpath expr="//t[@t-if='orders']" position="inside">
-            <div class="container mt16 mb16">
+    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//section[@id='terms']" position="before"> <!-- Adjust the position as needed -->
+            <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
                     <thead>
@@ -12,27 +12,21 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-foreach="orders" t-as="order">
-                        <tr t-if="order.metagraph_ids">
-                            <td colspan="4">
-                                <table>
-                                    <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
-                                        <tr>
-                                            <td t-esc="metagraph.name"/>
-                                            <td t-esc="metagraph.blockchain_status"/>
-                                            <td t-esc="metagraph.transaction_hash"/>
-                                            <td t-esc="metagraph.amount"/>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
+                    <tbody t-if="order.metagraph_ids">
+                        <tr t-foreach="order.metagraph_ids" t-as="metagraph">
+                            <td t-esc="metagraph.name"/>
+                            <td t-esc="metagraph.blockchain_status"/>
+                            <td t-esc="metagraph.transaction_hash"/>
+                            <td t-esc="metagraph.amount"/>
                         </tr>
-                        <tr t-if="not order.metagraph_ids">
+                    </tbody>
+                    <tbody t-if="not order.metagraph_ids">
+                        <tr>
                             <td colspan="4">No DAG Transactions available.</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
         </xpath>
     </template>
 </odoo>
