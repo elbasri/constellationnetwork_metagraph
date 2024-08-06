@@ -41,11 +41,6 @@ class PaymentDagController(http.Controller):
 
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
-            
-            _logger.info('Transaction status simulation: failed')
-            tx._set_transaction_cancel()
-            request.env.cr.rollback()
-            return redirect('/payment/process')
     
             metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
             if not metagraph:
@@ -106,8 +101,9 @@ class PaymentDagController(http.Controller):
                 _logger.info('Transaction not confirmed, rolling back.')
                 return redirect('/payment/process') 
         except Exception as e:
-            request.env.cr.rollback()  # Rollback in case of error
+            tx._set_transaction_cancel()
+            request.env.cr.rollback()
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
             return request.redirect('/payment/process')
         finally:
-            request.env.cr.autocommit(True)  # Re-enable autocommit
+            request.env.cr.autocommit(True)
