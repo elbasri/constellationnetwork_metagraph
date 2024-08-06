@@ -1,0 +1,25 @@
+<template id="portal_order_metagraph" inherit_id="sale.portal_order_page">
+    <xpath expr="//div[@id='portal_order_sheet']" position="inside">
+        <h3>DAG Transactions</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Transaction Hash</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="metagraphs" t-as="metagraph">
+                    <tr>
+                        <td><t t-esc="metagraph.name"/></td>
+                        <td><t t-esc="metagraph.blockchain_status"/></td>
+                        <td><t t-esc="metagraph.transaction_hash"/></td>
+                        <td><t t-esc="metagraph.amount"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </xpath>
+</template>

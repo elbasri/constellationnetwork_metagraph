@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <!-- Template Inheritances for Portal Pages -->
+        <record id="portal_order_metagraph_template" model="ir.ui.view">
+            <field name="name">portal.order.metagraph</field>
+            <field name="inherit_id" ref="sale.portal_order_page"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='portal_order_sheet']" position="inside">
+                    <h3>DAG Transactions</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Transaction Hash</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="metagraphs" t-as="metagraph">
+                                <tr>
+                                    <td><t t-esc="metagraph.name"/></td>
+                                    <td><t t-esc="metagraph.blockchain_status"/></td>
+                                    <td><t t-esc="metagraph.transaction_hash"/></td>
+                                    <td><t t-esc="metagraph.amount"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="portal_invoice_metagraph_template" model="ir.ui.view">
+            <field name="name">portal.invoice.metagraph</field>
+            <field name="inherit_id" ref="account.portal_invoice_page"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='invoice_sheet']" position="inside">
+                    <h3>DAG Transactions</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Transaction Hash</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="metagraphs" t-as="metagraph">
+                                <tr>
+                                    <td><t t-esc="metagraph.name"/></td>
+                                    <td><t t-esc="metagraph.blockchain_status"/></td>
+                                    <td><t t-esc="metagraph.transaction_hash"/></td>
+                                    <td><t t-esc="metagraph.amount"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
