@@ -91,14 +91,14 @@ class PaymentDagController(http.Controller):
                     'proof_id': metagraph.proof_id,
                     'proof_signature': metagraph.proof_signature,
                 })
-                request.env.cr.commit()  # Commit the transaction
+                request.env.cr.commit()
                 _logger.info('Database transaction committed successfully.')
-                return redirect('/payment/process')
+                return redirect('/payment/error')
             else:
                 tx._set_transaction_cancel()
-                request.env.cr.rollback()  # Rollback in case of issues
-                _logger.info('Database transaction rolled back.')
-                return redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
+                request.env.cr.rollback()
+                _logger.info('Transaction not confirmed, rolling back.')
+                return redirect('/payment/error') 
         except Exception as e:
             request.env.cr.rollback()  # Rollback in case of error
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
