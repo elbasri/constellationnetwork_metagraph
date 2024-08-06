@@ -92,12 +92,12 @@ class PaymentDagController(http.Controller):
                 })
                 request.env.cr.commit()  # Commit the transaction
                 _logger.info('Database transaction committed successfully.')
-                return request.redirect('https://immo.maktab.ma')  # Redirect to home page on success
+                return http.redirect('https://immo.maktab.ma')  # Redirect to home page on success
             else:
                 tx._set_transaction_cancel()
                 request.env.cr.rollback()  # Rollback in case of issues
                 _logger.info('Database transaction rolled back.')
-                return request.redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
+                return http.redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
         except Exception as e:
             request.env.cr.rollback()  # Rollback in case of error
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
