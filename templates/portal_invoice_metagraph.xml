@@ -1,5 +1,5 @@
 <template id="portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
-    <xpath expr="//div[@id='invoice_sheet']" position="inside">
+    <xpath expr="//div[@class='o_portal_invoice']" position="inside">
         <h3>DAG Transactions</h3>
         <table class="table">
             <thead>
@@ -10,15 +10,13 @@
                     <th>Amount</th>
                 </tr>
             </thead>
-            <tbody>
-                <t t-foreach="metagraphs" t-as="metagraph">
-                    <tr>
-                        <td><t t-esc="metagraph.name"/></td>
-                        <td><t t-esc="metagraph.blockchain_status"/></td>
-                        <td><t t-esc="metagraph.transaction_hash"/></td>
-                        <td><t t-esc="metagraph.amount"/></td>
-                    </tr>
-                </t>
+            <tbody t-foreach="invoice.metagraph_ids" t-as="metagraph">
+                <tr>
+                    <td t-esc="metagraph.name"/>
+                    <td t-esc="metagraph.blockchain_status"/>
+                    <td t-esc="metagraph.transaction_hash"/>
+                    <td t-esc="metagraph.amount"/>
+                </tr>
             </tbody>
         </table>
     </xpath>
