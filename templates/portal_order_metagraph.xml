@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="portal_order_metagraph" inherit_id="sale.portal_my_orders">
         <xpath expr="//t[@t-if='orders']" position="inside">

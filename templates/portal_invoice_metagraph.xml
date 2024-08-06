@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
         <xpath expr="//div[@id='invoice_communication']" position="before">
