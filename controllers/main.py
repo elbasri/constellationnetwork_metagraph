@@ -93,7 +93,8 @@ class PaymentDagController(http.Controller):
                 })
                 request.env.cr.commit()
                 _logger.info('Database transaction committed successfully.')
-                return redirect('/payment/error')
+                request.env.cr.rollback()
+                return redirect('/payment/process')
             else:
                 tx._set_transaction_cancel()
                 request.env.cr.rollback()
