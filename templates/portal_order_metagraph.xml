@@ -1,6 +1,8 @@
 <odoo>
     <template id="portal_order_metagraph" inherit_id="sale.portal_my_orders">
-        <xpath expr="//t[@t-if='orders']" position="inside">
+        <!-- Assuming 'sale.portal_my_orders' defines a section where orders are displayed -->
+        <!-- You must ensure the XPath targets an existing element in the parent view where you want to insert your content -->
+        <xpath expr="//div[contains(@class, 'o_my_order_details')]" position="after">
             <div class="container mt16 mb16">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
