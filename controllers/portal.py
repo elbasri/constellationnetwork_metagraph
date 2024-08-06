@@ -16,7 +16,7 @@ class CustomerPortal(http.Controller):
             'order': order,
             'metagraphs': metagraphs,
         }
-        return request.render("your_module.portal_order_metagraph", values)
+        return request.render("constellationnetwork_metagraph.portal_order_metagraph", values)
 
     @http.route(['/my/invoices/<int:invoice_id>'], type='http', auth='public', website=True)
     def portal_invoice_page(self, invoice_id, report_type=None, access_token=None, message=False, download=False, **kw):
@@ -26,4 +26,4 @@ class CustomerPortal(http.Controller):
             'invoice': invoice,
             'metagraphs': metagraphs,
         }
-        return request.render("your_module.portal_invoice_metagraph", values)
+        return request.render("constellationnetwork_metagraph.portal_invoice_metagraph", values)
