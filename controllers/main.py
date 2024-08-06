@@ -2,6 +2,7 @@ from odoo import http
 from odoo.http import request
 import logging
 from datetime import datetime
+from werkzeug.utils import redirect
 
 _logger = logging.getLogger(__name__)
 
@@ -92,12 +93,12 @@ class PaymentDagController(http.Controller):
                 })
                 request.env.cr.commit()  # Commit the transaction
                 _logger.info('Database transaction committed successfully.')
-                return http.redirect('https://immo.maktab.ma')  # Redirect to home page on success
+                return redirect('https://immo.maktab.ma')  # Redirect to home page on success
             else:
                 tx._set_transaction_cancel()
                 request.env.cr.rollback()  # Rollback in case of issues
                 _logger.info('Database transaction rolled back.')
-                return http.redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
+                return redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
         except Exception as e:
             request.env.cr.rollback()  # Rollback in case of error
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
