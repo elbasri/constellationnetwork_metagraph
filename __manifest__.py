@@ -22,7 +22,6 @@
         'views/payment_dag_error_page.xml',
         'templates/portal_invoice_metagraph.xml',
         'templates/portal_order_metagraph.xml',
-        'views/portal_views.xml',
     ],
     'installable': True,
     'application': True,
