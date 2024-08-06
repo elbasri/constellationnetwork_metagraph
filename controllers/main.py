@@ -42,7 +42,7 @@ class PaymentDagController(http.Controller):
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
             
-            logger.info('Transaction status simulation: failed')
+            _logger.info('Transaction status simulation: failed')
             tx._set_transaction_cancel()
             request.env.cr.rollback()
             return redirect('/payment/process?status=failed')
