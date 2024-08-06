@@ -1,6 +1,5 @@
 <odoo>
     <template id="portal_order_metagraph" inherit_id="sale.portal_my_orders">
-        <!-- This XPath inserts the DAG Transactions section just after the existing order table -->
         <xpath expr="//t[@t-if='orders']" position="inside">
             <div class="container mt16 mb16">
                 <h3>DAG Transactions</h3>
@@ -13,7 +12,7 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
+                    <tbody t-if="order.metagraph_ids" t-foreach="order.metagraph_ids" t-as="metagraph">
                         <tr>
                             <td t-esc="metagraph.name"/>
                             <td t-esc="metagraph.blockchain_status"/>
@@ -22,6 +21,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <p t-if="not order.metagraph_ids">No DAG Transactions available.</p>
             </div>
         </xpath>
     </template>
