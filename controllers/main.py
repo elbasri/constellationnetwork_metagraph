@@ -91,12 +91,13 @@ class PaymentDagController(http.Controller):
                     'proof_signature': metagraph.proof_signature,
                 })
                 request.env.cr.commit()  # Commit the transaction
-                return request.redirect("https://immo.maktab.ma")
-                #return request.render('constellationnetwork_metagraph.payment_dag_thank_you_page', {})
+                _logger.info('Database transaction committed successfully.')
+                return request.redirect('https://immo.maktab.ma')  # Redirect to home page on success
             else:
                 tx._set_transaction_cancel()
-                return request.redirect("https://immo.maktab.ma/cancelled")
-                #return request.render('constellationnetwork_metagraph.payment_dag_error_page', {})
+                request.env.cr.rollback()  # Rollback in case of issues
+                _logger.info('Database transaction rolled back.')
+                return request.redirect('https://immo.maktab.ma/cancelled')  # Redirect to cancelled page on failure
         except Exception as e:
             request.env.cr.rollback()  # Rollback in case of error
             _logger.exception('An error occurred, and the transaction was rolled back: %s', str(e))
