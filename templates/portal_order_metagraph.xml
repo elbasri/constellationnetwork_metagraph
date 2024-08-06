@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="sale.portal_order_page">
+    <template id="portal_order_metagraph" inherit_id="sale.portal_my_orders">
         <xpath expr="//div[contains(@class, 'o_portal_sale_order')]" position="inside">
             <div class="container mt16 mb16">
                 <h3>DAG Transactions</h3>
