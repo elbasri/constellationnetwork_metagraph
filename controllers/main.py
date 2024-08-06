@@ -93,7 +93,7 @@ class PaymentDagController(http.Controller):
                 })
                 request.env.cr.commit()  # Commit the transaction
                 _logger.info('Database transaction committed successfully.')
-                return redirect('https://immo.maktab.ma')  # Redirect to home page on success
+                return redirect('/payment/process')
             else:
                 tx._set_transaction_cancel()
                 request.env.cr.rollback()  # Rollback in case of issues
