@@ -1,7 +1,8 @@
 <odoo>
     <template id="portal_order_metagraph_layout" inherit_id="portal.portal_layout">
-        <xpath expr="//div[@class='o_portal_wrap']/div" position="inside">
-            <!-- This assumes you want to add it inside the main container div in the o_portal_wrap -->
+        <!-- Insert content into the main portal layout -->
+        <xpath expr="//div[@id='wrap']/div" position="inside">
+            <!-- Call the detailed transactions template -->
             <t t-call="constellationnetwork_metagraph.portal_order_metagraph"/>
         </xpath>
     </template>
