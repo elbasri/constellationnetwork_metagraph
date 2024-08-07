@@ -1,34 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
-        <xpath expr="//section[@id='terms']" position="before"> <!-- Adjust the position as needed -->
-            <section class="mt-5">
-                <h3>DAG Transactions</h3>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Transaction Hash</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody t-if="sale_order.metagraph_ids">
-                        <tr t-foreach="sale_order.metagraph_ids" t-as="metagraph">
-                            <td t-esc="metagraph.name"/>
-                            <td t-esc="metagraph.blockchain_status"/>
-                            <td t-esc="metagraph.transaction_hash"/>
-                            <td t-esc="metagraph.amount"/>
-                        </tr>
-                    </tbody>
-                    <tbody t-if="not sale_order.metagraph_ids">
-                        <tr>
-                            <td colspan="4">No DAG Transactions available.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+    <template id="portal_order_metagraph_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@class='o_portal_wrap']/div" position="inside">
+            <!-- This assumes you want to add it inside the main container div in the o_portal_wrap -->
+            <t t-call="constellationnetwork_metagraph.portal_order_metagraph"/>
         </xpath>
     </template>
-</odoo>
 
+    <template id="portal_order_metagraph">
+        <section class="mt-5">
+            <h3>DAG Transactions</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Transaction Hash</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody t-if="order.metagraph_ids">
+                    <tr t-foreach="order.metagraph_ids" t-as="metagraph">
+                        <td t-esc="metagraph.name"/>
+                        <td t-esc="metagraph.blockchain_status"/>
+                        <td t-esc="metagraph.transaction_hash"/>
+                        <td t-esc="metagraph.amount"/>
+                    </tr>
+                </tbody>
+                <tbody t-if="not order.metagraph_ids">
+                    <tr>
+                        <td colspan="4">No DAG Transactions available.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </template>
+</odoo>
