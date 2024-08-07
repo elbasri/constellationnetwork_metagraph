@@ -1,7 +1,7 @@
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="portal.portal_layout">
-        <!-- Insert content into the main portal layout -->
-        <xpath expr="//div[@id='wrap']/div" position="inside">
+    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
+        <!-- Insert the DAG Transactions section just before the totals table or at another suitable location -->
+        <xpath expr="//section[@id='details']" position="before">
             <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
@@ -13,7 +13,7 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-if="order and sale_order.metagraph_ids">
+                    <tbody t-if="sale_order and sale_order.metagraph_ids">
                         <tr t-foreach="sale_order.metagraph_ids" t-as="metagraph">
                             <td t-esc="metagraph.name"/>
                             <td t-esc="metagraph.blockchain_status"/>
@@ -21,12 +21,11 @@
                             <td t-esc="metagraph.amount"/>
                         </tr>
                     </tbody>
-                    <tbody t-if="not order or not sale_order.metagraph_ids">
+                    <tbody t-if="not sale_order or not sale_order.metagraph_ids">
                         <tr>
                             <td colspan="4">No DAG Transactions available.</td>
                         </tr>
                     </tbody>
-
                 </table>
             </section>
         </xpath>
