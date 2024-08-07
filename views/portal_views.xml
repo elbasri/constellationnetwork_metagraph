@@ -1,6 +1,6 @@
 <odoo>
     <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
-        <xpath expr="//section[@id='details']" position="inside">
+        <xpath expr="//section[@id='details']" position="after">
             <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
