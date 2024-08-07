@@ -1,7 +1,7 @@
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_template">
+    <template id="portal_order_metagraph" inherit_id="portal.portal_layout">
         <!-- Insert content into the main portal layout -->
-        <xpath expr="//div[@id='quote_content']/div" position="inside">
+        <xpath expr="//div[@id='wrap']/div" position="inside">
             <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
