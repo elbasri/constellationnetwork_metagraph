@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content_totals_table">
-        <xpath expr="//table[@class='table table-sm']" position="after"> <!-- Adjust the position as needed -->
+    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_template">
+        <!-- Insert content into the main portal layout -->
+        <xpath expr="//div[@id='sale_order_communication']/div" position="inside">
             <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
@@ -32,4 +32,3 @@
         </xpath>
     </template>
 </odoo>
-
