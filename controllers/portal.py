@@ -17,7 +17,7 @@ class CustomerPortal(http.Controller):
 
         # Prepare the data for rendering the template
         values = {
-            'order': sale_order,
+            'sale_order': sale_order,
             'metagraphs': sale_order.metagraph_ids,
             'report_type': report_type,
             'access_token': access_token,
