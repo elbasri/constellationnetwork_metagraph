@@ -1,14 +1,5 @@
 <odoo>
-    <!-- Inherit from portal layout to maintain overall layout structure -->
-    <template id="custom_portal_order_layout" inherit_id="portal.portal_layout">
-        <xpath expr="//div[@id='wrap']/div" position="inside">
-            <div class="o_portal_order_metagraph_layout">
-                <!-- Placeholder for custom content integration -->
-            </div>
-        </xpath>
-    </template>
-
-    <!-- Inherit from sale order content to insert DAG transactions and other order details -->
+    <!-- Inherit from the main sale order content to add custom DAG transactions -->
     <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
         <xpath expr="//section[@id='details']" position="before">
             <section class="mt-5">
@@ -37,6 +28,15 @@
                     </tbody>
                 </table>
             </section>
+        </xpath>
+    </template>
+
+    <!-- Ensure the base layout is applied by also inheriting the portal layout -->
+    <template id="custom_portal_order_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@id='wrap']/div" position="inside">
+            <div class="o_portal_order_metagraph_layout">
+                <!-- This is a placeholder for potential further customization -->
+            </div>
         </xpath>
     </template>
 </odoo>
