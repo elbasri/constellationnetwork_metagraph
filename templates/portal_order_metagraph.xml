@@ -13,7 +13,7 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-if="order and order.metagraph_ids">
+                    <tbody t-if="order and metagraphs">
                         <tr t-foreach="metagraphs" t-as="metagraph">
                             <td t-esc="metagraph.name"/>
                             <td t-esc="metagraph.blockchain_status"/>
