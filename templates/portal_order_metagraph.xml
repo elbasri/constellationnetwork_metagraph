@@ -12,15 +12,15 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-if="order.metagraph_ids">
-                        <tr t-foreach="order.metagraph_ids" t-as="metagraph">
+                    <tbody t-if="sale_order.metagraph_ids">
+                        <tr t-foreach="sale_order.metagraph_ids" t-as="metagraph">
                             <td t-esc="metagraph.name"/>
                             <td t-esc="metagraph.blockchain_status"/>
                             <td t-esc="metagraph.transaction_hash"/>
                             <td t-esc="metagraph.amount"/>
                         </tr>
                     </tbody>
-                    <tbody t-if="not order.metagraph_ids">
+                    <tbody t-if="not sale_order.metagraph_ids">
                         <tr>
                             <td colspan="4">No DAG Transactions available.</td>
                         </tr>

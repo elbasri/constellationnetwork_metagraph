@@ -11,14 +11,14 @@ class CustomerPortal(http.Controller):
     @http.route(['/my/orders/<int:order_id>'], type='http', auth='user', website=True)
     def portal_order_page(self, order_id, report_type=None, access_token=None, message=False, download=False, **kw):
         # Ensure that the user has access to this order
-        order = request.env['sale.order'].sudo().browse(order_id)
-        if not order or order.partner_id != request.env.user.partner_id:
+        sale_order = request.env['sale.order'].sudo().browse(order_id)
+        if not sale_order or sale_order.partner_id != request.env.user.partner_id:
             return request.redirect('/my')  # Redirect to the user's portal if access is denied
 
         # Prepare the data for rendering the template
         values = {
-            'order': order,
-            'metagraphs': order.metagraph_ids,
+            'sale_order': sale_order,
+            'metagraphs': sale_order.metagraph_ids,
             'report_type': report_type,
             'access_token': access_token,
             'message': message,
