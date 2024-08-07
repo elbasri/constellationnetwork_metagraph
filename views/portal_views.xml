@@ -1,66 +1,42 @@
 <odoo>
-    <data>
-        <!-- Template Inheritances for Portal Pages -->
-        <record id="portal_order_metagraph_template" model="ir.ui.view">
-            <field name="name">portal.order.metagraph</field>
-            <field name="inherit_id" ref="sale.portal_my_orders"/>  <!-- Ensure this is the correct ID -->
-            <field name="arch" type="xml">
-                <!-- Correct XPath according to the structure provided in sale.portal_my_orders -->
-                <xpath expr="//t[@t-if='orders']" position="inside">
-                    <div class="container mt16 mb16">
-                        <h3>DAG Transactions</h3>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Transaction Hash</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody t-foreach="order.metagraph_ids" t-as="metagraph">
-                                <tr>
-                                    <td t-esc="metagraph.name"/>
-                                    <td t-esc="metagraph.blockchain_status"/>
-                                    <td t-esc="metagraph.transaction_hash"/>
-                                    <td t-esc="metagraph.amount"/>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </xpath>
-            </field>
-        </record>
-        
-        <record id="portal_invoice_metagraph_template" model="ir.ui.view">
-            <field name="name">portal.invoice.metagraph</field>
-            <field name="inherit_id" ref="account.portal_invoice_page"/>  <!-- Ensure this is the correct ID -->
-            <field name="arch" type="xml">
-                <!-- Ensure the position is before a valid container element in account.portal_invoice_page -->
-                <xpath expr="//div[contains(@class, 'o_portal_invoice')]" position="before">
-                    <div class="container mt16 mb16">
-                        <h3>DAG Transactions</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Transaction Hash</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody t-foreach="invoice.metagraph_ids" t-as="metagraph">
-                                <tr>
-                                    <td t-esc="metagraph.name"/>
-                                    <td t-esc="metagraph.blockchain_status"/>
-                                    <td t-esc="metagraph.transaction_hash"/>
-                                    <td t-esc="metagraph.amount"/>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </xpath>
-            </field>
-        </record>
-    </data>
+    <!-- Inherit from portal layout to maintain overall layout structure -->
+    <template id="custom_portal_order_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@id='wrap']/div" position="inside">
+            <div class="o_portal_order_metagraph_layout">
+                <!-- Placeholder for custom content integration -->
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Inherit from sale order content to insert DAG transactions and other order details -->
+    <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//section[@id='details']" position="before">
+            <section class="mt-5">
+                <h3>DAG Transactions</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Transaction Hash</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody t-if="sale_order and sale_order.metagraph_ids">
+                        <tr t-foreach="sale_order.metagraph_ids" t-as="metagraph">
+                            <td t-esc="metagraph.name"/>
+                            <td t-esc="metagraph.blockchain_status"/>
+                            <td t-esc="metagraph.transaction_hash"/>
+                            <td t-esc="metagraph.amount"/>
+                        </tr>
+                    </tbody>
+                    <tbody t-if="not sale_order or not sale_order.metagraph_ids">
+                        <tr>
+                            <td colspan="4">No DAG Transactions available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </xpath>
+    </template>
 </odoo>
