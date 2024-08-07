@@ -1,6 +1,12 @@
 <odoo>
+    <template id="portal_order_metagraph_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@id='portal_content']" position="inside">
+            <t t-call="constellationnetwork_metagraph.portal_order_metagraph"/>
+        </xpath>
+    </template>
+
     <template id="portal_order_metagraph" inherit_id="sale.sale_order_portal_content">
-        <xpath expr="//section[@id='terms']" position="before"> <!-- Adjust the position as needed -->
+        <xpath expr="//section[@id='terms']" position="before">
             <section class="mt-5">
                 <h3>DAG Transactions</h3>
                 <table class="table table-hover">
