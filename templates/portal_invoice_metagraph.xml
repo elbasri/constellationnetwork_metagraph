@@ -1,32 +1,34 @@
 <odoo>
-    <template id="custom_portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
-        <xpath expr="//div[@id='invoice_communication']" position="before">
-            <div class="container mt16 mb16">
-                <h3>DAG Transactions</h3>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Transaction Hash</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody t-foreach="invoice.metagraph_ids" t-as="metagraph">
-                        <tr>
-                            <td t-esc="metagraph.name"/>
-                            <td t-esc="metagraph.blockchain_status"/>
-                            <td t-esc="metagraph.transaction_hash"/>
-                            <td t-esc="metagraph.amount"/>
-                        </tr>
-                    </tbody>
-                    <tbody t-if="not invoice.metagraph_ids">
-                        <tr>
-                            <td colspan="4">No DAG Transactions available.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </xpath>
-    </template>
+    <data>
+        <template id="portal_invoice_metagraph" inherit_id="account.portal_invoice_page">
+            <xpath expr="//div[@id='invoice_communication']" position="before">
+                <div class="container mt16 mb16">
+                    <h3>DAG Transactions</h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Transaction Hash</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody t-if="invoice and invoice.metagraph_ids">
+                            <tr t-foreach="invoice.metagraph_ids" t-as="metagraph">
+                                <td t-esc="metagraph.name"/>
+                                <td t-esc="metagraph.blockchain_status"/>
+                                <td t-esc="metagraph.transaction_hash"/>
+                                <td t-esc="metagraph.amount"/>
+                            </tr>
+                        </tbody>
+                        <tbody t-if="not invoice or not invoice.metagraph_ids">
+                            <tr>
+                                <td colspan="4">No DAG Transactions available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </xpath>
+        </template>
+    </data>
 </odoo>
