@@ -8,7 +8,7 @@ class CustomerPortal(http.Controller):
         # Include additional data preparation here if necessary
         return values
 
-    @http.route(['/my/orders/<int:order_id>'], type='http', auth='user', website=True)
+    @http.route(['/my/ordersold/<int:order_id>'], type='http', auth='user', website=True)
     def portal_order_page(self, order_id, report_type=None, access_token=None, message=False, download=False, **kw):
         # Ensure that the user has access to this order
         sale_order = request.env['sale.order'].sudo().browse(order_id)
@@ -26,7 +26,7 @@ class CustomerPortal(http.Controller):
         }
         return request.render("constellationnetwork_metagraph.portal_order_metagraph", values)
 
-    @http.route(['/my/invoicess/<int:invoice_id>'], type='http', auth='user', website=True)
+    @http.route(['/my/invoicesold/<int:invoice_id>'], type='http', auth='user', website=True)
     def portal_invoice_page(self, invoice_id, report_type=None, access_token=None, message=False, download=False, **kw):
         # Ensure that the user has access to this invoice
         invoice = request.env['account.move'].sudo().browse(invoice_id)
