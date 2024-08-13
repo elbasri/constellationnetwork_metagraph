@@ -1,6 +1,7 @@
 <odoo>
-    <template id="report_invoice_document_with_dag" inherit_id="account.report_invoice_document">
-        <xpath expr="//div[@class='page']/div[@class='row'][last()]" position="after">
+    <data inherit_id="account.report_invoice_document">
+        <!-- Insert the DAG Transactions section before the totals table -->
+        <xpath expr="//div[@id='total']" position="before">
             <div class="mt32">
                 <h3>DAG Transactions</h3>
                 <table class="table table-sm">
@@ -12,15 +13,15 @@
                             <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody t-if="doc.metagraph_ids">
-                        <tr t-foreach="doc.metagraph_ids" t-as="metagraph">
+                    <tbody t-if="o.metagraph_ids">
+                        <tr t-foreach="o.metagraph_ids" t-as="metagraph">
                             <td t-esc="metagraph.name"/>
                             <td t-esc="metagraph.blockchain_status"/>
                             <td t-esc="metagraph.transaction_hash"/>
                             <td t-esc="metagraph.amount"/>
                         </tr>
                     </tbody>
-                    <tbody t-if="not doc.metagraph_ids">
+                    <tbody t-if="not o.metagraph_ids">
                         <tr>
                             <td colspan="4">No DAG Transactions available.</td>
                         </tr>
@@ -28,5 +29,5 @@
                 </table>
             </div>
         </xpath>
-    </template>
+    </data>
 </odoo>
