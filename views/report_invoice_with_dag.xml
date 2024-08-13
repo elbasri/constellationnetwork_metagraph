@@ -1,6 +1,6 @@
 <odoo>
-    <data inherit_id="account.report_invoice_document">
-        <!-- Insert the DAG Transactions section before the totals table -->
+    <data>
+        <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
         <xpath expr="//div[@id='total']" position="before">
             <div class="mt32">
                 <h3>DAG Transactions</h3>
@@ -29,5 +29,6 @@
                 </table>
             </div>
         </xpath>
+        </template>
     </data>
 </odoo>
