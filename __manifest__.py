@@ -22,7 +22,7 @@
         'views/payment_dag_error_page.xml',
         #'templates/portal_invoice_metagraph.xml',
         'templates/portal_order_metagraph.xml',
-        'report_invoice_with_dag.xml',
+        'views/report_invoice_with_dag.xml',
         
     ],
     'installable': True,
