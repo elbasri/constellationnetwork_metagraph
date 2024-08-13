@@ -20,7 +20,6 @@
         'views/sale_order_views.xml',
         'views/payment_dag_thank_you_page.xml',
         'views/payment_dag_error_page.xml',
-        'templates/portal_invoice_metagraph.xml',
         'templates/portal_order_metagraph.xml',
         
     ],
