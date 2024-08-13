@@ -1,0 +1,32 @@
+<odoo>
+    <template id="report_invoice_document_with_dag" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='page']/div[@class='row'][last()]" position="after">
+            <div class="mt32">
+                <h3>DAG Transactions</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Transaction Hash</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody t-if="doc.metagraph_ids">
+                        <tr t-foreach="doc.metagraph_ids" t-as="metagraph">
+                            <td t-esc="metagraph.name"/>
+                            <td t-esc="metagraph.blockchain_status"/>
+                            <td t-esc="metagraph.transaction_hash"/>
+                            <td t-esc="metagraph.amount"/>
+                        </tr>
+                    </tbody>
+                    <tbody t-if="not doc.metagraph_ids">
+                        <tr>
+                            <td colspan="4">No DAG Transactions available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>

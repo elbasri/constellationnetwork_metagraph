@@ -7,7 +7,7 @@
         Module to manage metagraphs and their configurations for Constellation Network
     """,
     'author': 'ABDENNACER Elbasri',
-    'depends': ['base', 'mail', 'sale', 'stock', 'payment', 'website'],
+    'depends': ['base', 'mail', 'sale', 'stock', 'payment', 'website', 'account'],
     'data': [
         'views/metagraph_views.xml',
         'security/ir.model.access.csv',
@@ -20,8 +20,9 @@
         'views/sale_order_views.xml',
         'views/payment_dag_thank_you_page.xml',
         'views/payment_dag_error_page.xml',
-        'templates/portal_invoice_metagraph.xml',
+        #'templates/portal_invoice_metagraph.xml',
         'templates/portal_order_metagraph.xml',
+        'report_invoice_with_dag.xml',
         
     ],
     'installable': True,
