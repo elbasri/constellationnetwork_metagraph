@@ -4,29 +4,29 @@
             <xpath expr="//div[@id='total']" position="before">
                 <div class="mt32">
                     <h3>DAG Transactions</h3>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Transaction Hash</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody t-if="o.metagraph_ids">
-                            <tr t-foreach="o.metagraph_ids" t-as="metagraph">
-                                <td t-esc="metagraph.name"/>
-                                <td t-esc="metagraph.blockchain_status"/>
-                                <td t-esc="metagraph.transaction_hash"/>
-                                <td t-esc="metagraph.amount"/>
-                            </tr>
-                        </tbody>
-                        <tbody t-if="not o.metagraph_ids">
-                            <tr>
-                                <td colspan="4">No DAG Transactions available.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <t t-if="doc and hasattr(doc, 'metagraph_ids') and doc.metagraph_ids">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Transaction Hash</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.metagraph_ids" t-as="metagraph">
+                                    <td t-esc="metagraph.name"/>
+                                    <td t-esc="metagraph.blockchain_status"/>
+                                    <td t-esc="metagraph.transaction_hash"/>
+                                    <td t-esc="metagraph.amount"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="not doc or not hasattr(doc, 'metagraph_ids') or not doc.metagraph_ids">
+                        <p>No DAG Transactions available.</p>
+                    </t>
                 </div>
             </xpath>
         </template>
