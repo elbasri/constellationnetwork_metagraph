@@ -24,6 +24,8 @@
         #'templates/portal_order_metagraph.xml',
         'views/report_invoice_with_dag.xml',
         'views/report_saleorder_with_dag.xml',
+        'views/purchase_order_view.xml',
+        'views/dag_transaction_report_views.xml',
         
     ],
     'installable': True,

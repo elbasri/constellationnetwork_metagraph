@@ -1,13 +1,19 @@
 <odoo>
     <record id="view_stock_picking_form_inherit" model="ir.ui.view">
-        <field name="name">stock.picking.form.inherit</field>
+        <field name="name">stock.picking.form.inherit.metagraph</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet/group/group" position="inside">
-                <group>
-                    <field name="transaction_hash"/>
-                    <field name="payment_status"/>
+            <xpath expr="//sheet" position="inside">
+                <group string="DAG Transactions">
+                    <field name="metagraph_ids" widget="one2many_list" context="{'default_picking_id': active_id}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="transaction_hash"/>
+                            <field name="blockchain_status"/>
+                            <field name="amount"/>
+                        </tree>
+                    </field>
                 </group>
             </xpath>
         </field>

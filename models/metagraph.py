@@ -40,6 +40,8 @@ class Metagraph(models.Model):
     # Add references to Sale Order and Invoice
     sale_order_id = fields.Many2one('sale.order', string='Sale Order')
     invoice_id = fields.Many2one('account.move', string='Invoice')
+    purchase_order_id = fields.Many2one('purchase.order', string='Purchase Order')
+    picking_id = fields.Many2one('stock.picking', string='Stock Picking')
 
     def retry_operation(self, operation, *args, **kwargs):
         max_retries = 5

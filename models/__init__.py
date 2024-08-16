@@ -6,3 +6,5 @@ from . import stock_picking
 from . import payment_acquirer_dag
 from . import sale_order
 from . import account_move
+from . import dag_reporting
+from . import purchase_order

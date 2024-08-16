@@ -1,0 +1,66 @@
+<odoo>
+    <record id="view_dag_transaction_report_form" model="ir.ui.view">
+        <field name="name">dag.transaction.report.form</field>
+        <field name="model">dag.transaction.report</field>
+        <field name="arch" type="xml">
+            <form string="DAG Transaction Report">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="total_amount" readonly="1"/>
+                        <field name="total_fee" readonly="1"/>
+                        <field name="state" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Transactions">
+                            <field name="transaction_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="transaction_hash"/>
+                                    <field name="blockchain_status"/>
+                                    <field name="amount"/>
+                                    <field name="fee"/>
+                                    <field name="timestamp"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string="Confirm" type="object" name="confirm_report" class="oe_highlight" states="draft"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dag_transaction_report_tree" model="ir.ui.view">
+        <field name="name">dag.transaction.report.tree</field>
+        <field name="model">dag.transaction.report</field>
+        <field name="arch" type="xml">
+            <tree string="DAG Transaction Reports">
+                <field name="name"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="total_amount"/>
+                <field name="total_fee"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_dag_transaction_report" name="DAG Transaction Reports" parent="account.menu_finance_reports" action="action_dag_transaction_report"/>
+
+    <record id="action_dag_transaction_report" model="ir.actions.act_window">
+        <field name="name">DAG Transaction Reports</field>
+        <field name="res_model">dag.transaction.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first DAG transaction report
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,22 +1,19 @@
-from odoo import models, fields, api
-import logging
-
-_logger = logging.getLogger(__name__)
+from odoo import models, fields
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    transaction_hash = fields.Char(string='Transaction Hash')
-    payment_status = fields.Selection([
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
-        ('failed', 'Failed')
-    ], string='Payment Status', default='pending')
+    metagraph_ids = fields.One2many(
+        'metagraph', 'picking_id', string='DAG Transactions'
+    )
+
+    def action_confirm(self):
+        super(StockPicking, self).action_confirm()
+        for metagraph in self.metagraph_ids:
+            metagraph.check_status()
 
     def button_validate(self):
         res = super(StockPicking, self).button_validate()
-        if self.payment_status == 'completed':
-            _logger.info(f"Stock Picking {self.name} validated with payment status: {self.payment_status}")
-        else:
-            _logger.warning(f"Stock Picking {self.name} has not been completed. Payment status: {self.payment_status}")
+        for metagraph in self.metagraph_ids:
+            metagraph.check_status()
         return res

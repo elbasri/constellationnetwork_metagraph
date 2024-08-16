@@ -1,12 +1,12 @@
 <odoo>
-    <record id="view_sale_order_form_inherit" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.metagraph</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+    <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.metagraph</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
                 <group string="DAG Transactions">
-                    <field name="metagraph_ids" widget="one2many_list" context="{'default_sale_order_id': active_id}">
+                    <field name="metagraph_ids" widget="one2many_list" context="{'default_purchase_order_id': active_id}">
                         <tree>
                             <field name="name"/>
                             <field name="transaction_hash"/>
