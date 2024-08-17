@@ -63,5 +63,5 @@
     </record>
 
     <menuitem id="menu_metagraph_root" name="Metagraph Management" sequence="10"/>
-    <menuitem id="menu_metagraph_config" name="Configurations" parent="menu_metagraph_root" action="action_metagraph_config" sequence="1"/>
+    <menuitem id="menu_metagraph_config" name="Configurations" parent="menu_metagraph_root" action="action_metagraph_config" sequence="3"/>
 </odoo>
