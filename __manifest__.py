@@ -26,6 +26,7 @@
         'views/report_saleorder_with_dag.xml',
         'views/purchase_order_view.xml',
         'views/dag_transaction_report_views.xml',
+        'views/metagraph_report_views.xml',
         
     ],
     'installable': True,
