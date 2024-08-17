@@ -2,10 +2,12 @@
     'name': 'Metagraph Management',
     'version': '1.0',
     'category': 'Tools',
-    'summary': 'Integrate Constellation Network Metagraph in Odoo',
+    'summary': 'Manage Constellation Network Metagraph',
     'description': """
         Module to manage metagraphs and their configurations for Constellation Network
     """,
+    'images': ['static/description/icon.png'],
+    'web_icon_data': '/your_module/static/description/icon.png',
     'author': 'ABDENNACER Elbasri',
     'depends': ['base', 'sale', 'stock', 'payment', 'website', 'account', 'purchase'],
     'data': [
@@ -20,16 +22,17 @@
         'views/sale_order_views.xml',
         'views/payment_dag_thank_you_page.xml',
         'views/payment_dag_error_page.xml',
-        #'templates/portal_invoice_metagraph.xml',
-        #'templates/portal_order_metagraph.xml',
         'views/report_invoice_with_dag.xml',
         'views/report_saleorder_with_dag.xml',
         'views/purchase_order_view.xml',
         'views/dag_transaction_report_views.xml',
         'views/metagraph_report_views.xml',
-        
     ],
-    'images': ['static/description/icon.png'],
+    'assets': {
+       'web.assets_backend': [
+           'your_module/static/description/icon.png',
+       ],
+    },
     'installable': True,
     'application': True,
     'controllers': ['controllers/main.py'],
