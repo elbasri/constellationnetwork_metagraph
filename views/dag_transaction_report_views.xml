@@ -1,4 +1,20 @@
 <odoo>
+    <!-- Action Definition -->
+    <record id="action_dag_transaction_report" model="ir.actions.act_window">
+        <field name="name">DAG Transaction Reports</field>
+        <field name="res_model">dag.transaction.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first DAG transaction report
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_dag_transaction_report" name="DAG Transaction Reports" parent="account.menu_finance_reports" action="action_dag_transaction_report"/>
+
+    <!-- Form View -->
     <record id="view_dag_transaction_report_form" model="ir.ui.view">
         <field name="name">dag.transaction.report.form</field>
         <field name="model">dag.transaction.report</field>
@@ -36,6 +52,7 @@
         </field>
     </record>
 
+    <!-- Tree View -->
     <record id="view_dag_transaction_report_tree" model="ir.ui.view">
         <field name="name">dag.transaction.report.tree</field>
         <field name="model">dag.transaction.report</field>
@@ -48,19 +65,6 @@
                 <field name="total_fee"/>
                 <field name="state"/>
             </tree>
-        </field>
-    </record>
-
-    <menuitem id="menu_dag_transaction_report" name="DAG Transaction Reports" parent="account.menu_finance_reports" action="action_dag_transaction_report"/>
-
-    <record id="action_dag_transaction_report" model="ir.actions.act_window">
-        <field name="name">DAG Transaction Reports</field>
-        <field name="res_model">dag.transaction.report</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create your first DAG transaction report
-            </p>
         </field>
     </record>
 </odoo>
