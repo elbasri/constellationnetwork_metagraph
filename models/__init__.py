@@ -8,3 +8,4 @@ from . import sale_order
 from . import account_move
 from . import dag_reporting
 from . import purchase_order
+from . import metagraph_report

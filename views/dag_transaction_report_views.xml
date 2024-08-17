@@ -66,5 +66,5 @@
     </record>
 
     <!-- Menu Item under Metagraph Management -->
-    <menuitem id="menu_dag_transaction_report" name="DAG Transaction Reports" parent="menu_metagraph_root" action="action_dag_transaction_report" sequence="2"/>
+    <menuitem id="menu_dag_transaction_report" name="DAG Reports" parent="menu_metagraph_root" action="action_dag_transaction_report" sequence="2"/>
 </odoo>

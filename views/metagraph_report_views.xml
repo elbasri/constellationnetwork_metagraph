@@ -1,0 +1,29 @@
+<odoo>
+    <!-- Graph View -->
+    <record id="view_metagraph_report_graph" model="ir.ui.view">
+        <field name="name">metagraph.report.graph</field>
+        <field name="model">metagraph.report</field>
+        <field name="arch" type="xml">
+            <graph string="Metagraph Report">
+                <field name="amount" type="measure"/>
+                <field name="blockchain_status" type="row"/>
+                <field name="timestamp" type="col" interval="day"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action for the Report -->
+    <record id="action_metagraph_report" model="ir.actions.act_window">
+        <field name="name">Metagraph Report</field>
+        <field name="res_model">metagraph.report</field>
+        <field name="view_mode">graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                View the report of Metagraph transactions.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item for the Report -->
+    <menuitem id="menu_metagraph_report" name="Metagraph Report" parent="menu_metagraph_root" action="action_metagraph_report" sequence="3"/>
+</odoo>
