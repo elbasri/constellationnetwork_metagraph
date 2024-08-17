@@ -6,7 +6,7 @@
     'description': """
         Module to manage metagraphs and their configurations for Constellation Network
     """,
-    'images': ['static/description/dag_icon.png'],
+    'images': ['static/description/icon.png'],
     'author': 'ABDENNACER Elbasri',
     'depends': ['base', 'sale', 'stock', 'payment', 'website', 'account', 'purchase'],
     'data': [
