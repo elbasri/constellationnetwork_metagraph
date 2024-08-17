@@ -7,7 +7,7 @@
         Module to manage metagraphs and their configurations for Constellation Network
     """,
     'author': 'ABDENNACER Elbasri',
-    'depends': ['base', 'mail', 'sale', 'stock', 'payment', 'website', 'account'],
+    'depends': ['base', 'mail', 'sale', 'stock', 'payment', 'website', 'account', 'purchase'],
     'data': [
         'views/metagraph_views.xml',
         'security/ir.model.access.csv',
