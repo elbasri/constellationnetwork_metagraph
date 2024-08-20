@@ -7,7 +7,7 @@
         Module to manage metagraphs and their configurations for Constellation Network
     """,
     'images': ['static/description/icon.png'],
-    'web_icon_data': '/your_module/static/description/icon.png',
+    'web_icon_data': '/constellationnetwork_metagraph/static/description/icon.png',
     'author': 'ABDENNACER Elbasri',
     'depends': ['base', 'sale', 'stock', 'payment', 'website', 'account', 'purchase'],
     'data': [
@@ -30,7 +30,7 @@
     ],
     'assets': {
        'web.assets_backend': [
-           'your_module/static/description/icon.png',
+           'constellationnetwork_metagraph/static/description/icon.png',
        ],
     },
     'installable': True,
