@@ -91,6 +91,8 @@ class PaymentDagController(http.Controller):
                     'salt': metagraph.salt,
                     'proof_id': metagraph.proof_id,
                     'proof_signature': metagraph.proof_signature,
+                    'sale_order_id': sale_order.id if sale_order else None,
+                    'invoice_id': invoice.id if invoice else None,
                 })
                 request.env.cr.commit()
                 _logger.info('Database transaction committed successfully.')
