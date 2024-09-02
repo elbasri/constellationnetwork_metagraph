@@ -75,12 +75,13 @@ class PaymentDagController(http.Controller):
                 metagraph = request.env['metagraph'].create(metagraph_data)
                 _logger.info('Metagraph record created successfully: %s', metagraph)
             else:
-                # If the metagraph exists, ensure it is linked with the correct Sale Order or Invoice
-                _logger.info('Updating existing Metagraph record with Sale Order ID: %s and Invoice ID: %s', sale_order.id if sale_order else None, invoice.id if invoice else None)
-                metagraph.write({
-                    'sale_order_id': sale_order.id if sale_order else metagraph.sale_order_id.id,
-                    'invoice_id': invoice.id if invoice else metagraph.invoice_id.id,
-                })
+                # If the metagraph exists, update either the Sale Order ID or the Invoice ID
+                if sale_order:
+                    _logger.info('Linking existing Metagraph record to Sale Order ID: %s', sale_order.id)
+                    metagraph.write({'sale_order_id': sale_order.id})
+                elif invoice:
+                    _logger.info('Linking existing Metagraph record to Invoice ID: %s', invoice.id)
+                    metagraph.write({'invoice_id': invoice.id})
                 _logger.info('Metagraph record updated successfully: %s', metagraph)
 
             _logger.info('Checking status of Metagraph transaction: %s', transaction_hash)
