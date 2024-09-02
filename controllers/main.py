@@ -29,15 +29,20 @@ class PaymentDagController(http.Controller):
         _logger.info('DAG payment feedback received with post data: %s', post)
         transaction_hash = post.get('dag_transaction_hash')
         reference = post.get('reference')
-        tx = request.env['payment.transaction'].sudo().search([('reference', '=', reference)])
+        _logger.info('Transaction hash: %s, Reference: %s', transaction_hash, reference)
 
+        # Find the payment transaction
+        tx = request.env['payment.transaction'].sudo().search([('reference', '=', reference)])
         if not tx:
             _logger.error('Transaction not found for reference %s', reference)
             return request.redirect('/payment/process')
+        _logger.info('Found transaction: %s', tx)
 
         # Attempt to link with Sale Order or Invoice
         sale_order = request.env['sale.order'].sudo().search([('name', '=', reference)], limit=1)
         invoice = request.env['account.move'].sudo().search([('payment_reference', '=', reference), ('move_type', '=', 'out_invoice')], limit=1)
+        _logger.info('Found sale order: %s', sale_order)
+        _logger.info('Found invoice: %s', invoice)
 
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
@@ -66,18 +71,23 @@ class PaymentDagController(http.Controller):
                     'sale_order_id': sale_order.id if sale_order else None,
                     'invoice_id': invoice.id if invoice else None,
                 }
-                _logger.info('Attempting to create Metagraph record with data: %s', metagraph_data)
+                _logger.info('Creating new Metagraph record with data: %s', metagraph_data)
                 metagraph = request.env['metagraph'].create(metagraph_data)
                 _logger.info('Metagraph record created successfully: %s', metagraph)
             else:
+                # If the metagraph exists, ensure it is linked with the correct Sale Order or Invoice
+                _logger.info('Updating existing Metagraph record with Sale Order ID: %s and Invoice ID: %s', sale_order.id if sale_order else None, invoice.id if invoice else None)
                 metagraph.write({
                     'sale_order_id': sale_order.id if sale_order else metagraph.sale_order_id.id,
                     'invoice_id': invoice.id if invoice else metagraph.invoice_id.id,
                 })
+                _logger.info('Metagraph record updated successfully: %s', metagraph)
 
+            _logger.info('Checking status of Metagraph transaction: %s', transaction_hash)
             metagraph.check_status()
             if metagraph.blockchain_status == 'confirmed':
                 tx._set_transaction_done()
+                _logger.info('Transaction confirmed. Marking as done and updating Metagraph.')
                 metagraph.write({
                     'blockchain_status': 'confirmed',
                     'blockchain_hash': metagraph.blockchain_hash,
