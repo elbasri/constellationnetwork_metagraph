@@ -31,6 +31,10 @@ class PaymentDagController(http.Controller):
         reference = post.get('reference')
         _logger.info('Transaction hash: %s, Reference: %s', transaction_hash, reference)
 
+        # Adjust the reference to search for Sale Order and Invoice
+        # Strip or adjust the reference if necessary
+        stripped_reference = reference.split('-')[0]  # Assuming the order is "S00009-1-4-2"
+
         # Find the payment transaction
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', reference)])
         if not tx:
@@ -39,8 +43,15 @@ class PaymentDagController(http.Controller):
         _logger.info('Found transaction: %s', tx)
 
         # Attempt to link with Sale Order or Invoice
-        sale_order = request.env['sale.order'].sudo().search([('name', '=', reference)], limit=1)
-        invoice = request.env['account.move'].sudo().search([('payment_reference', '=', reference), ('move_type', '=', 'out_invoice')], limit=1)
+        sale_order = request.env['sale.order'].sudo().search([('name', '=', stripped_reference)], limit=1)
+        invoice = request.env['account.move'].sudo().search([('payment_reference', '=', stripped_reference), ('move_type', '=', 'out_invoice')], limit=1)
+        
+        # If the stripped reference doesn't work, try original reference as fallback
+        if not sale_order:
+            sale_order = request.env['sale.order'].sudo().search([('name', '=', reference)], limit=1)
+        if not invoice:
+            invoice = request.env['account.move'].sudo().search([('payment_reference', '=', reference), ('move_type', '=', 'out_invoice')], limit=1)
+
         _logger.info('Found sale order: %s', sale_order)
         _logger.info('Found invoice: %s', invoice)
 
