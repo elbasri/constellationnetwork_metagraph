@@ -41,7 +41,6 @@ class PaymentDagController(http.Controller):
 
         request.env.cr.autocommit(False)  # Disable autocommit
         try:
-    
             metagraph = request.env['metagraph'].sudo().search([('transaction_hash', '=', transaction_hash)], limit=1)
             if not metagraph:
                 metagraph_data = {
@@ -70,6 +69,11 @@ class PaymentDagController(http.Controller):
                 _logger.info('Attempting to create Metagraph record with data: %s', metagraph_data)
                 metagraph = request.env['metagraph'].create(metagraph_data)
                 _logger.info('Metagraph record created successfully: %s', metagraph)
+            else:
+                metagraph.write({
+                    'sale_order_id': sale_order.id if sale_order else metagraph.sale_order_id.id,
+                    'invoice_id': invoice.id if invoice else metagraph.invoice_id.id,
+                })
 
             metagraph.check_status()
             if metagraph.blockchain_status == 'confirmed':
@@ -91,8 +95,6 @@ class PaymentDagController(http.Controller):
                     'salt': metagraph.salt,
                     'proof_id': metagraph.proof_id,
                     'proof_signature': metagraph.proof_signature,
-                    'sale_order_id': sale_order.id if sale_order else None,
-                    'invoice_id': invoice.id if invoice else None,
                 })
                 request.env.cr.commit()
                 _logger.info('Database transaction committed successfully.')
