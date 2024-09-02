@@ -31,9 +31,8 @@ class PaymentDagController(http.Controller):
         reference = post.get('reference')
         _logger.info('Transaction hash: %s, Reference: %s', transaction_hash, reference)
 
-        # Adjust the reference to search for Sale Order and Invoice
         # Strip or adjust the reference if necessary
-        stripped_reference = reference.split('-')[0]  # Assuming the order is "S00009-1-4-2"
+        stripped_reference = reference.split('-')[0]
 
         # Find the payment transaction
         tx = request.env['payment.transaction'].sudo().search([('reference', '=', reference)])
