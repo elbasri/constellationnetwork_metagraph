@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constellation Network Metagraph Integration for Odoo ERP</title>
+</head>
+<body>
+
+<h1>Constellation Network Metagraph Integration for Odoo ERP</h1>
+
+<h2>Project Description</h2>
+<p>This project integrates Constellation Network's DAG-based payment method into the Odoo ERP system, enabling secure and transparent transactions. Additionally, it enhances supply chain management using metagraph technology, offering a transparent and efficient way to handle transactions across the supply chain.</p>
+
+<h2>Demo</h2>
+<p>You can access the live demo of the project at:</p>
+<ul>
+    <li><strong>Demo URL:</strong> <a href="https://metagraph.maktab.ma/web" target="_blank">https://metagraph.maktab.ma/web</a></li>
+    <li><strong>Username:</strong> demo</li>
+    <li><strong>Password:</strong> nacer</li>
+</ul>
+
+<h2>Video</h2>
+<p>Watch the project demonstration on YouTube:</p>
+<ul>
+    <li><strong>Short Video (4 minutes):</strong> <a href="https://www.youtube.com/watch?v=BxcnlLiw2aU" target="_blank">https://www.youtube.com/watch?v=BxcnlLiw2aU</a></li>
+    <li><strong>Full Video (22 minutes):</strong> <a href="https://www.youtube.com/watch?v=G5mytFuCvFg" target="_blank">https://www.youtube.com/watch?v=G5mytFuCvFg</a></li>
+</ul>
+
+<h2>Installation and Configuration</h2>
+
+<h3>Prerequisites</h3>
+<ul>
+    <li>Odoo 14+</li>
+    <li>Python 3.6+</li>
+    <li>PostgreSQL</li>
+</ul>
+
+<h3>Steps to Install</h3>
+<ol>
+    <li><strong>Clone the Repository:</strong>
+        <pre><code>git clone https://github.com/elbasri/constellationnetwork_metagraph.git
+cd constellationnetwork_metagraph
+        </code></pre>
+    </li>
+    <li><strong>Install Required Python Dependencies:</strong>
+        <p>Use pip to install necessary dependencies:</p>
+        <pre><code>pip install -r requirements.txt</code></pre>
+    </li>
+    <li><strong>Configure Odoo:</strong>
+        <p>Place the module in your Odoo custom addons directory.</p>
+        <p>Update your Odoo configuration file (<code>odoo.conf</code>) to include the custom addons directory:</p>
+        <pre><code>addons_path = /path/to/custom/addons,/path/to/odoo/addons</code></pre>
+    </li>
+    <li><strong>Update Odoo:</strong>
+        <p>Restart your Odoo instance and update the module list from the Odoo interface. Install the <code>constellationnetwork_metagraph</code> module from the Apps menu.</p>
+    </li>
+</ol>
+
+<h3>Configuration</h3>
+<ol>
+    <li><strong>Metagraph Configuration:</strong>
+        <ul>
+            <li>Navigate to <strong>Metagraph Management &gt; Configurations</strong>.</li>
+            <li>Configure your wallet addresses and network URLs (Testnet, Integration, Mainnet).</li>
+        </ul>
+    </li>
+    <li><strong>Payment Acquirer Setup:</strong>
+        <ul>
+            <li>Go to <strong>Website &gt; Configuration &gt; Payment Acquirers</strong>.</li>
+            <li>Add a new payment acquirer for DAG with the necessary credentials.</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>Main Features</h2>
+<ul>
+    <li><strong>DAG-based Payments:</strong> 
+        <ul>
+            <li>Integration with Constellation Network to handle payments using DAG technology.</li>
+            <li>Supports Testnet, Integration, and Mainnet environments.</li>
+        </ul>
+    </li>
+    <li><strong>Supply Chain Transparency:</strong>
+        <ul>
+            <li>Leverages metagraph technology to enhance visibility and traceability in the supply chain.</li>
+            <li>Linked to Sale Orders, Purchase Orders, and Stock Pickings.</li>
+        </ul>
+    </li>
+    <li><strong>Graphical Reports:</strong>
+        <ul>
+            <li>View metagraph transaction statistics through a visual dashboard within Odoo.</li>
+        </ul>
+    </li>
+</ul>
+
+<h2>Code Snippets</h2>
+
+<h3>Metagraph Model Example:</h3>
+<pre><code>class Metagraph(models.Model):
+    _name = 'metagraph'
+    _description = 'Metagraph'
+
+    name = fields.Char(string='Metagraph Name', required=True)
+    blockchain_status = fields.Selection([
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('failed', 'Failed')
+    ], string='Blockchain Status', default='pending')
+    transaction_hash = fields.Char(string='Transaction Hash')
+    amount = fields.Float(string='Amount')
+    # Additional fields and methods...
+</code></pre>
+
+<h3>Transaction Status Check Example:</h3>
+<pre><code>def check_status(self):
+    api = ConstellationAPI(self._get_base_url(), self._get_faucet_url(), self._get_check_status_url())
+    status = self.retry_operation(api.get_metagraph_status, self.transaction_hash)
+    if 'data' in status:
+        data = status['data']
+        self.blockchain_status = 'confirmed'
+        self.transaction_hash = data.get('hash')
+        # Additional logic...
+</code></pre>
+
+<h2>License</h2>
+<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+
+<h2>Contributing</h2>
+<p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
+
+<h2>Contact</h2>
+<p>For any questions or issues, please contact <a href="https://github.com/elbasri">Abdennacer Elbasri</a>.</p>
+
+</body>
+</html>
