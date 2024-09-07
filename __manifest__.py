@@ -9,6 +9,7 @@
     'images': ['static/description/icon.png'],
     'web_icon_data': '/constellationnetwork_metagraph/static/description/icon.png',
     'author': 'ABDENNACER Elbasri',
+    'license': 'LGPL-3',
     'depends': ['base', 'sale', 'stock', 'payment', 'website', 'account', 'purchase'],
     'data': [
         'views/metagraph_views.xml',

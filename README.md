@@ -120,7 +120,7 @@ def check_status(self):
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the LGPL-3 License - see the odoo opensource suported licences file for details.
 
 ## Contributing
 
