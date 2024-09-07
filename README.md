@@ -24,7 +24,7 @@ Watch the project demonstration on YouTube:
 
 ### Prerequisites
 
-- Odoo 14+
+- Odoo 13+
 - Python 3.6+
 - PostgreSQL
 
