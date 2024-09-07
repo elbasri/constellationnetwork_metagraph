@@ -24,7 +24,7 @@ Watch the project demonstration on YouTube:
 
 ### Prerequisites
 
-- Odoo 13+
+- Odoo 13+ (to odoo 17)
 - Python 3.6+
 - PostgreSQL
 
@@ -36,6 +36,9 @@ Watch the project demonstration on YouTube:
    git clone https://github.com/elbasri/constellationnetwork_metagraph.git
    cd constellationnetwork_metagraph
    ```
+
+**you can also download it directly from odoo apps store (apps.odoo.com):** [https://apps.odoo.com/apps/modules/17.0/constellationnetwork_metagraph](https://apps.odoo.com/apps/modules/17.0/constellationnetwork_metagraph)
+
 
 2. **Install Required Python Dependencies:**
 
