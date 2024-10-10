@@ -40,12 +40,10 @@ Watch the project demonstration on YouTube:
 **you can also download it directly from odoo apps store (apps.odoo.com):** [https://apps.odoo.com/apps/modules/17.0/constellationnetwork_metagraph](https://apps.odoo.com/apps/modules/17.0/constellationnetwork_metagraph)
 
 
-2. **Install Required Python Dependencies:**
-
-   Use pip to install necessary dependencies:
+2. **Install ODOO:**
 
    ```bash
-   pip install -r requirements.txt
+   [INSTALL ODOO17 (ARABIC)](https://github.com/elbasri/odoo17)
    ```
 
 3. **Configure Odoo:**
