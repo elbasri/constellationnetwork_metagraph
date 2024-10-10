@@ -42,9 +42,9 @@ Watch the project demonstration on YouTube:
 
 2. **Install ODOO:**
 
-   ```bash
+
    [INSTALL ODOO17 (ARABIC)](https://github.com/elbasri/odoo17)
-   ```
+ 
 
 3. **Configure Odoo:**
 
